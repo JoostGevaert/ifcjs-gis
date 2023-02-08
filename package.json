@@ -4,6 +4,8 @@
   "description": "BIM + GIS web page",
   "main": "index.js",
   "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
