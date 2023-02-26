@@ -4,6 +4,8 @@
   "description": "BIM + GIS web page",
   "main": "index.js",
   "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +26,9 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",
     "rollup": "^3.14.0"
+  },
+  "dependencies": {
+    "three": "^0.135.0",
+    "web-ifc-viewer": "^1.0.213"
   }
 }
