@@ -51,57 +51,33 @@ const canvas = document.getElementById("three-canvas");
 //1 The scene
 const scene = new Scene();
 
-//2 The Object
-const geometry = new BoxGeometry(0.5, 0.5, 0.5);
-const orangeMaterial = new MeshPhongMaterial({
-  color: "orange",
-  specular: "white",
-  shininess: 100,
-  flatShading: true,
-  polygonOffset: true,
-  polygonOffsetFactor: 1,
-  polygonOffsetUnits: 1,
-});
-const orangeCubeMesh = new Mesh(geometry, orangeMaterial);
-const orangeEdgesGeo = new EdgesGeometry(orangeCubeMesh.geometry);
-const orangeEdgesMaterial = new LineBasicMaterial({ color: "black" });
-const orangeCubeEdges = new LineSegments(orangeEdgesGeo, orangeEdgesMaterial);
-orangeCubeMesh.add(orangeCubeEdges);
-scene.add(orangeCubeMesh);
+//2 The Objects
+function createGeoWithEdges(geometry, color, x) {
+  const material = new MeshPhongMaterial({
+    color: color,
+    specular: "white",
+    shininess: 100,
+    flatShading: true,
+    polygonOffset: true,
+    polygonOffsetFactor: 1,
+    polygonOffsetUnits: 1,
+  });
+  const mesh = new Mesh(geometry, material);
+  const edgesGeo = new EdgesGeometry(mesh.geometry);
+  const edgesMaterial = new LineBasicMaterial({ color: "black" });
+  const edges = new LineSegments(edgesGeo, edgesMaterial);
+  mesh.add(edges);
+  mesh.position.x += x;
+  return mesh;
+}
 
-const greenMaterial = new MeshPhongMaterial({
-  color: "green",
-  specular: "white",
-  shininess: 100,
-  flatShading: true,
-  polygonOffset: true,
-  polygonOffsetFactor: 1,
-  polygonOffsetUnits: 1,
-});
-const greenCubeMesh = new Mesh(geometry, greenMaterial);
-const greenEdgesGeo = new EdgesGeometry(greenCubeMesh.geometry);
-const greenEdgesMaterial = new LineBasicMaterial({ color: "black" });
-const greenCubeEdges = new LineSegments(greenEdgesGeo, greenEdgesMaterial);
-greenCubeMesh.add(greenCubeEdges);
-greenCubeMesh.position.x += 1;
-scene.add(greenCubeMesh);
-
-const blueMaterial = new MeshPhongMaterial({
-  color: "blue",
-  specular: "white",
-  shininess: 100,
-  flatShading: true,
-  polygonOffset: true,
-  polygonOffsetFactor: 1,
-  polygonOffsetUnits: 1,
-});
-const blueCubeMesh = new Mesh(geometry, blueMaterial);
-const blueEdgesGeo = new EdgesGeometry(blueCubeMesh.geometry);
-const blueEdgesMaterial = new LineBasicMaterial({ color: "black" });
-const blueCubeEdges = new LineSegments(blueEdgesGeo, blueEdgesMaterial);
-blueCubeMesh.add(blueCubeEdges);
-blueCubeMesh.position.x -= 1;
-scene.add(blueCubeMesh);
+const boxGeometry = new BoxGeometry(0.5, 0.5, 0.5);
+const orangeCube = createGeoWithEdges(boxGeometry, "orange", 0);
+scene.add(orangeCube);
+const greenCube = createGeoWithEdges(boxGeometry, "green", 1);
+scene.add(greenCube);
+const blueCube = createGeoWithEdges(boxGeometry, "blue", -1);
+scene.add(blueCube);
 
 //3 The Camera
 const camera = new PerspectiveCamera(
@@ -151,14 +127,14 @@ scene.add(grid);
 
 // 8 Animate
 function animate() {
-  orangeCubeMesh.rotation.x += 0.01;
-  orangeCubeMesh.rotation.z += 0.01;
+  orangeCube.rotation.x += 0.01;
+  orangeCube.rotation.z += 0.01;
 
-  greenCubeMesh.rotation.x += 0.015;
-  greenCubeMesh.rotation.z += 0.015;
+  greenCube.rotation.x += 0.015;
+  greenCube.rotation.z += 0.015;
 
-  blueCubeMesh.rotation.x += 0.005;
-  blueCubeMesh.rotation.z += 0.005;
+  blueCube.rotation.x += 0.005;
+  blueCube.rotation.z += 0.005;
 
   const delta = clock.getDelta();
   cameraControls.update(delta);
