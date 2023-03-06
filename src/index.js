@@ -1,15 +1,42 @@
-import { Color } from 'three';
-import { IfcViewerAPI } from 'web-ifc-viewer';
+import { createThreeScene } from "./basic-three";
+import { loadIfc } from "./model-viewer";
 
-const container = document.getElementById('viewer-container');
-const viewer = new IfcViewerAPI({ container, backgroundColor: new Color(0xffffff) });
-viewer.grid.setGrid();
-viewer.axes.setAxes();
+const canvas = document.getElementById("three-canvas");
+if (canvas) {
+  const [renderer, scene, clock, cameraControls] = createThreeScene(canvas);
+  const orangeCube = scene.getObjectByName("orangeCube");
+  const greenCube = scene.getObjectByName("greenCube");
+  const blueCube = scene.getObjectByName("blueCube");
+  const camera = scene.getObjectByName("camera");
 
-async function loadIfc(url) {
-    await viewer.IFC.setWasmPath("../");
-    const model = await viewer.IFC.loadIfcUrl(url);
-    viewer.shadowDropper.renderShadow(model.modelID);
+  window.addEventListener("resize", () => {
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+  });
+
+  function animate() {
+    orangeCube.rotation.x += 0.01;
+    orangeCube.rotation.z += 0.01;
+
+    greenCube.rotation.x += 0.015;
+    greenCube.rotation.z += 0.015;
+
+    blueCube.rotation.x += 0.005;
+    blueCube.rotation.z += 0.005;
+
+    const delta = clock.getDelta();
+    cameraControls.update(delta);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
 
-loadIfc("../IFC/01.ifc");
+let ifcModelNumber = 0;
+const ifcViewerContainer = document.getElementById("viewer-container");
+if (ifcViewerContainer) {
+  ifcModelNumber = localStorage.getItem("ifc");
+  loadIfc(ifcViewerContainer, ifcModelNumber);
+}
