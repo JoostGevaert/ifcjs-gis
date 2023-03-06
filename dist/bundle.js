@@ -124341,7 +124341,7 @@ async function loadIfc(container, ifcModelNumber) {
   if (ifcModelNumber < 1 || ifcModelNumber > 5) {
     return;
   } else {
-    const url = `./IFC/0${ifcModelNumber}.ifc`;
+    const url = `./bim-gis/IFC/0${ifcModelNumber}.ifc`;
     const viewer = new IfcViewerAPI({
       container,
       backgroundColor: new Color(0xffffff),
@@ -124349,7 +124349,7 @@ async function loadIfc(container, ifcModelNumber) {
     viewer.grid.setGrid();
     viewer.axes.setAxes();
 
-    await viewer.IFC.setWasmPath("./");
+    await viewer.IFC.setWasmPath("./bim-gis/");
     const model = await viewer.IFC.loadIfcUrl(url);
     viewer.shadowDropper.renderShadow(model.modelID);
   }
