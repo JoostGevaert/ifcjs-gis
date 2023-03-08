@@ -1,18 +1,25 @@
-import { createThreeScene } from "./basic-three";
+import { BoxGeometry } from "three";
+
+import { createThreeScene, createGeoWithEdges } from "./basic-three";
 import { loadIfc } from "./model-viewer";
 
-const canvas = document.getElementById("three-canvas");
-if (canvas) {
-  const [renderer, scene, clock, cameraControls] = createThreeScene(canvas);
-  const orangeCube = scene.getObjectByName("orangeCube");
-  const greenCube = scene.getObjectByName("greenCube");
-  const blueCube = scene.getObjectByName("blueCube");
+const threeCanvas = document.getElementById("basic-three");
+if (threeCanvas) {
+  const [renderer, scene, clock, cameraControls] =
+    createThreeScene(threeCanvas);
+  const boxGeometry = new BoxGeometry(0.5, 0.5, 0.5);
+  const orangeCube = createGeoWithEdges(boxGeometry, "orange", 0);
+  scene.add(orangeCube);
+  const greenCube = createGeoWithEdges(boxGeometry, "green", 1);
+  scene.add(greenCube);
+  const blueCube = createGeoWithEdges(boxGeometry, "blue", -1);
+  scene.add(blueCube);
   const camera = scene.getObjectByName("camera");
 
   window.addEventListener("resize", () => {
-    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.aspect = threeCanvas.clientWidth / threeCanvas.clientHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    renderer.setSize(threeCanvas.clientWidth, threeCanvas.clientHeight, false);
   });
 
   function animate() {
@@ -39,4 +46,26 @@ const ifcViewerContainer = document.getElementById("viewer-container");
 if (ifcViewerContainer) {
   ifcModelNumber = localStorage.getItem("ifc");
   loadIfc(ifcViewerContainer, ifcModelNumber);
+}
+
+const gltfCanvas = document.getElementById("gltf");
+if (gltfCanvas) {
+  const [renderer, scene, clock, cameraControls] =
+    createThreeScene(threeCanvas);
+  cameraControls.setLookAt(15, 15, 15, 0, 10, 0);
+
+  window.addEventListener("resize", () => {
+    camera.aspect = threeCanvas.clientWidth / threeCanvas.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(threeCanvas.clientWidth, threeCanvas.clientHeight, false);
+  });
+
+  function animate() {
+    const delta = clock.getDelta();
+    cameraControls.update(delta);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }

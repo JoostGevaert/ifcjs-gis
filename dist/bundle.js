@@ -46505,12 +46505,7 @@ let CameraControls$1 = class CameraControls extends EventDispatcher$1 {
     }
 };
 
-function createThreeScene(canvas) {
-  //1 The scene
-const scene = new Scene();
-
-//2 The Objects
-function createGeoWithEdges(geometry, color, x) {
+const createGeoWithEdges = (geometry, color, x) => {
   const material = new MeshPhongMaterial({
     color: color,
     specular: "white",
@@ -46527,78 +46522,71 @@ function createGeoWithEdges(geometry, color, x) {
   mesh.add(edges);
   mesh.position.x += x;
   return mesh;
-}
-
-const boxGeometry = new BoxGeometry(0.5, 0.5, 0.5);
-const orangeCube = createGeoWithEdges(boxGeometry, "orange", 0);
-orangeCube.name = "orangeCube";
-scene.add(orangeCube);
-const greenCube = createGeoWithEdges(boxGeometry, "green", 1);
-greenCube.name = "greenCube";
-scene.add(greenCube);
-const blueCube = createGeoWithEdges(boxGeometry, "blue", -1);
-blueCube.name = "blueCube";
-scene.add(blueCube);
-
-//3 The Camera
-const camera = new PerspectiveCamera(
-  75,
-  canvas.clientWidth / canvas.clientHeight
-);
-camera.position.z = 3; // Z let's you move backwards and forwards. X is sideways, Y is upward and do
-camera.name = "camera";
-scene.add(camera);
-
-//4 The Renderer
-const renderer = new WebGLRenderer({
-  canvas: canvas,
-  antialias: true,
-  alpha: true,
-});
-
-renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-
-// 5 The Lights
-const ambientLight = new AmbientLight(0xffffff, 0.2);
-scene.add(ambientLight);
-const directionalLight = new DirectionalLight(0xffffff, 1);
-directionalLight.position.set(0, 1, 1).normalize();
-scene.add(directionalLight);
-
-// 6 The Controls
-const subsetOfTHREE = {
-  MOUSE,
-  Vector2,
-  Vector3,
-  Vector4,
-  Quaternion,
-  Matrix4,
-  Spherical,
-  Box3,
-  Sphere,
-  Raycaster,
-  MathUtils: {
-    DEG2RAD: MathUtils.DEG2RAD,
-    clamp: MathUtils.clamp,
-  },
 };
-CameraControls$1.install({ THREE: subsetOfTHREE });
-const clock = new Clock();
-const cameraControls = new CameraControls$1(camera, canvas);
 
-// 7 The Axes & Grid Helpers
-const axes = new AxesHelper();
-axes.material.depthTest = false;
-axes.renderOrder = 2;
-scene.add(axes);
+const createThreeScene = (canvas) => {
+  //1 The scene
+  const scene = new Scene();
 
-const grid = new GridHelper();
-grid.material.depthTest = false;
-grid.renderOrder = 1;
-scene.add(grid);
+  //3 The Camera
+  const camera = new PerspectiveCamera(
+    75,
+    canvas.clientWidth / canvas.clientHeight
+  );
+  camera.position.z = 3; // Z let's you move backwards and forwards. X is sideways, Y is upward and do
+  camera.name = "camera";
+  scene.add(camera);
+
+  //4 The Renderer
+  const renderer = new WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: true,
+  });
+
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+
+  // 5 The Lights
+  const ambientLight = new AmbientLight(0xffffff, 0.2);
+  scene.add(ambientLight);
+  const directionalLight = new DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(0, 1, 1).normalize();
+  scene.add(directionalLight);
+
+  // 6 The Controls
+  const subsetOfTHREE = {
+    MOUSE,
+    Vector2,
+    Vector3,
+    Vector4,
+    Quaternion,
+    Matrix4,
+    Spherical,
+    Box3,
+    Sphere,
+    Raycaster,
+    MathUtils: {
+      DEG2RAD: MathUtils.DEG2RAD,
+      clamp: MathUtils.clamp,
+    },
+  };
+  CameraControls$1.install({ THREE: subsetOfTHREE });
+  const clock = new Clock();
+  const cameraControls = new CameraControls$1(camera, canvas);
+
+  // 7 The Axes & Grid Helpers
+  const axes = new AxesHelper();
+  axes.material.depthTest = false;
+  axes.renderOrder = 2;
+  scene.add(axes);
+
+  const grid = new GridHelper();
+  grid.material.depthTest = false;
+  grid.renderOrder = 1;
+  scene.add(grid);
 
   return [renderer, scene, clock, cameraControls];
-}
+};
 
 var NavigationModes;
 (function (NavigationModes) {
@@ -124341,7 +124329,7 @@ async function loadIfc(container, ifcModelNumber) {
   if (ifcModelNumber < 1 || ifcModelNumber > 5) {
     return;
   } else {
-    const url = `./IFC/0${ifcModelNumber}.ifc`;
+    const url = `./static/IFC/0${ifcModelNumber}.ifc`;
     const viewer = new IfcViewerAPI({
       container,
       backgroundColor: new Color(0xffffff),
@@ -124355,18 +124343,23 @@ async function loadIfc(container, ifcModelNumber) {
   }
 }
 
-const canvas = document.getElementById("three-canvas");
-if (canvas) {
-  const [renderer, scene, clock, cameraControls] = createThreeScene(canvas);
-  const orangeCube = scene.getObjectByName("orangeCube");
-  const greenCube = scene.getObjectByName("greenCube");
-  const blueCube = scene.getObjectByName("blueCube");
+const threeCanvas = document.getElementById("basic-three");
+if (threeCanvas) {
+  const [renderer, scene, clock, cameraControls] =
+    createThreeScene(threeCanvas);
+  const boxGeometry = new BoxGeometry(0.5, 0.5, 0.5);
+  const orangeCube = createGeoWithEdges(boxGeometry, "orange", 0);
+  scene.add(orangeCube);
+  const greenCube = createGeoWithEdges(boxGeometry, "green", 1);
+  scene.add(greenCube);
+  const blueCube = createGeoWithEdges(boxGeometry, "blue", -1);
+  scene.add(blueCube);
   const camera = scene.getObjectByName("camera");
 
   window.addEventListener("resize", () => {
-    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.aspect = threeCanvas.clientWidth / threeCanvas.clientHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    renderer.setSize(threeCanvas.clientWidth, threeCanvas.clientHeight, false);
   });
 
   function animate() {
@@ -124393,4 +124386,26 @@ const ifcViewerContainer = document.getElementById("viewer-container");
 if (ifcViewerContainer) {
   ifcModelNumber = localStorage.getItem("ifc");
   loadIfc(ifcViewerContainer, ifcModelNumber);
+}
+
+const gltfCanvas = document.getElementById("gltf");
+if (gltfCanvas) {
+  const [renderer, scene, clock, cameraControls] =
+    createThreeScene(threeCanvas);
+  cameraControls.setLookAt(15, 15, 15, 0, 10, 0);
+
+  window.addEventListener("resize", () => {
+    camera.aspect = threeCanvas.clientWidth / threeCanvas.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(threeCanvas.clientWidth, threeCanvas.clientHeight, false);
+  });
+
+  function animate() {
+    const delta = clock.getDelta();
+    cameraControls.update(delta);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
