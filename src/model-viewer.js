@@ -5,7 +5,7 @@ export async function loadIfc(container, ifcModelNumber) {
   if (ifcModelNumber < 1 || ifcModelNumber > 5) {
     return;
   } else {
-    const url = `./IFC/0${ifcModelNumber}.ifc`;
+    const url = `./static/IFC/0${ifcModelNumber}.ifc`;
     const viewer = new IfcViewerAPI({
       container,
       backgroundColor: new Color(0xffffff),
