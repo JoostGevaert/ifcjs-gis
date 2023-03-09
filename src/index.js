@@ -2,6 +2,7 @@ import { BoxGeometry } from "three";
 
 import { createThreeScene, createGeoWithEdges } from "./basic-three";
 import { loadIfc } from "./model-viewer";
+import { loadGltf } from "./gltf";
 
 // Create a basic Three.js scene with 3 rotating cubes.
 const threeCanvas = document.getElementById("basic-three");
@@ -53,12 +54,13 @@ if (ifcViewerContainer) {
 // Load a glTF in Three.js
 const gltfCanvas = document.getElementById("gltf");
 if (gltfCanvas) {
-  console.log("Hey glTF!");
-  console.log(gltfCanvas);
-  const [renderer, scene, clock, cameraControls] =
-    createThreeScene(gltfCanvas);
+  const [renderer, scene, clock, cameraControls] = createThreeScene(gltfCanvas);
   const camera = scene.getObjectByName("camera");
   cameraControls.setLookAt(15, 15, 15, 0, 10, 0);
+
+  gltfUrl = "../static/glTF/police_station.glb";
+  loaderContainer = document.getElementById("loader-container");
+  loadGltf(gltfUrl, scene, loaderContainer);
 
   window.addEventListener("resize", () => {
     camera.aspect = gltfCanvas.clientWidth / gltfCanvas.clientHeight;

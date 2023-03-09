@@ -46550,7 +46550,7 @@ const createThreeScene = (canvas) => {
   const ambientLight = new AmbientLight(0xffffff, 0.2);
   scene.add(ambientLight);
   const directionalLight = new DirectionalLight(0xffffff, 1);
-  directionalLight.position.set(0, 1, 1).normalize();
+  directionalLight.position.set(-1, 1, 1).normalize();
   scene.add(directionalLight);
 
   // 6 The Controls
@@ -124343,6 +124343,24 @@ async function loadIfc(container, ifcModelNumber) {
   }
 }
 
+const loadGltf = (gltfUrl, scene, loaderContainer) => {
+  const loader = new GLTFLoader();
+
+  loader.load(
+    gltfUrl,
+    (gltf) => {
+      loaderContainer.style.display = "none";
+      scene.add(gltf.scene);
+    },
+    (progress) => {
+      console.log("Loading");
+    },
+    (error) => {
+      console.log("Error");
+    }
+  );
+};
+
 // Create a basic Three.js scene with 3 rotating cubes.
 const threeCanvas = document.getElementById("basic-three");
 if (threeCanvas) {
@@ -124393,12 +124411,13 @@ if (ifcViewerContainer) {
 // Load a glTF in Three.js
 const gltfCanvas = document.getElementById("gltf");
 if (gltfCanvas) {
-  console.log("Hey glTF!");
-  console.log(gltfCanvas);
-  const [renderer, scene, clock, cameraControls] =
-    createThreeScene(gltfCanvas);
+  const [renderer, scene, clock, cameraControls] = createThreeScene(gltfCanvas);
   const camera = scene.getObjectByName("camera");
   cameraControls.setLookAt(15, 15, 15, 0, 10, 0);
+
+  gltfUrl = "../static/glTF/police_station.glb";
+  loaderContainer = document.getElementById("loader-container");
+  loadGltf(gltfUrl, scene, loaderContainer);
 
   window.addEventListener("resize", () => {
     camera.aspect = gltfCanvas.clientWidth / gltfCanvas.clientHeight;

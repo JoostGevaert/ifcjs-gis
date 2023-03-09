@@ -73,7 +73,7 @@ export const createThreeScene = (canvas) => {
   const ambientLight = new AmbientLight(0xffffff, 0.2);
   scene.add(ambientLight);
   const directionalLight = new DirectionalLight(0xffffff, 1);
-  directionalLight.position.set(0, 1, 1).normalize();
+  directionalLight.position.set(-1, 1, 1).normalize();
   scene.add(directionalLight);
 
   // 6 The Controls
