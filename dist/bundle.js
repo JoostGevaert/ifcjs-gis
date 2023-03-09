@@ -124401,7 +124401,7 @@ if (threeCanvas) {
   animate();
 }
 
-// Visualize several different IFC models
+// Visualize several different IFC models read from the repo
 let ifcModelNumber = 0;
 const ifcViewerContainer = document.getElementById("viewer-container");
 if (ifcViewerContainer) {
@@ -124435,3 +124435,5 @@ if (gltfCanvas) {
 
   animate();
 }
+
+// Upload an IFC file and visualize it with web-ifc-three (WIT)

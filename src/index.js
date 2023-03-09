@@ -1,7 +1,7 @@
 import { BoxGeometry } from "three";
 
 import { createThreeScene, createGeoWithEdges } from "./basic-three";
-import { loadIfc } from "./model-viewer";
+import { loadIfc } from "./ifc-viewer";
 import { loadGltf } from "./gltf";
 
 // Create a basic Three.js scene with 3 rotating cubes.
@@ -43,7 +43,7 @@ if (threeCanvas) {
   animate();
 }
 
-// Visualize several different IFC models
+// Visualize several different IFC models read from the repo
 let ifcModelNumber = 0;
 const ifcViewerContainer = document.getElementById("viewer-container");
 if (ifcViewerContainer) {
@@ -77,3 +77,6 @@ if (gltfCanvas) {
 
   animate();
 }
+
+// Upload an IFC file and visualize it with web-ifc-three (WIT)
+
