@@ -124368,6 +124368,21 @@ const loadGltf = (gltfUrl, scene, loaderContainer) => {
   );
 };
 
+const uploadIfc = (inputElement, threeScene) => {
+  const ifcLoader = new IFCLoader();
+
+  inputElement.addEventListener(
+    "change",
+    async (changed) => {
+      const ifcURL = URL.createObjectURL(changed.target.file[0]);
+      await ifcLoader.ifcManager.setWasmPath("./");
+      const ifcModel = await ifcLoader.loadAsync(ifcURL);
+      threeScene.add(ifcModel);
+    },
+    false
+  );
+};
+
 // Create a basic Three.js scene with 3 rotating cubes.
 const threeCanvas = document.getElementById("basic-three");
 if (threeCanvas) {
@@ -124433,7 +124448,19 @@ if (gltfCanvas) {
 // Upload an IFC file and visualize it with web-ifc-three (WIT)
 const ifcThreeCanvas = document.getElementById("wit");
 if (ifcThreeCanvas) {
-  createThreeScene(ifcThreeCanvas);
+  const [renderer, scene, clock, cameraControls] =
+    createThreeScene(ifcThreeCanvas);
+  const camera = scene.getObjectByName("camera");
+
+  const input = document.getElementById("file-input");
+  uploadIfc(input, scene);
+
+  function animate() {
+    const delta = clock.getDelta();
+    cameraControls.update(delta);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
 
   animate();
 }

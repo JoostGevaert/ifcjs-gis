@@ -261,3 +261,8 @@ iframe {
   flex-direction: column;
   color: white;
 }
+
+#file-input {
+  position: absolute;
+  margin: 8px;
+}

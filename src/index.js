@@ -4,6 +4,7 @@ import { createThreeScene } from "./basic-three";
 import { createGeoWithEdges } from "./three-cubes";
 import { loadIfc } from "./ifc-viewer";
 import { loadGltf } from "./gltf";
+import { uploadIfc } from "./ifc-three";
 
 // Create a basic Three.js scene with 3 rotating cubes.
 const threeCanvas = document.getElementById("basic-three");
@@ -70,7 +71,19 @@ if (gltfCanvas) {
 // Upload an IFC file and visualize it with web-ifc-three (WIT)
 const ifcThreeCanvas = document.getElementById("wit");
 if (ifcThreeCanvas) {
-  const [renderer, scene, clock, cameraControls] = createThreeScene(ifcThreeCanvas);
+  const [renderer, scene, clock, cameraControls] =
+    createThreeScene(ifcThreeCanvas);
+  const camera = scene.getObjectByName("camera");
 
-  animate()
+  const input = document.getElementById("file-input");
+  uploadIfc(input, scene);
+
+  function animate() {
+    const delta = clock.getDelta();
+    cameraControls.update(delta);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
