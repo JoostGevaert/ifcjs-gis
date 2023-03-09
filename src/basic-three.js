@@ -1,6 +1,5 @@
 import {
   Scene,
-  Mesh,
   PerspectiveCamera,
   WebGLRenderer,
   Vector2,
@@ -15,37 +14,13 @@ import {
   MathUtils,
   MOUSE,
   Clock,
-  MeshBasicMaterial,
-  MeshPhongMaterial,
   DirectionalLight,
   AmbientLight,
   AxesHelper,
   GridHelper,
-  EdgesGeometry,
-  LineBasicMaterial,
-  LineSegments,
 } from "three";
 
 import CameraControls from "camera-controls";
-
-export const createGeoWithEdges = (geometry, color, x) => {
-  const material = new MeshPhongMaterial({
-    color: color,
-    specular: "white",
-    shininess: 100,
-    flatShading: true,
-    polygonOffset: true,
-    polygonOffsetFactor: 1,
-    polygonOffsetUnits: 1,
-  });
-  const mesh = new Mesh(geometry, material);
-  const edgesGeo = new EdgesGeometry(mesh.geometry);
-  const edgesMaterial = new LineBasicMaterial({ color: "black" });
-  const edges = new LineSegments(edgesGeo, edgesMaterial);
-  mesh.add(edges);
-  mesh.position.x += x;
-  return mesh;
-};
 
 export const createThreeScene = (canvas) => {
   //1 The scene
@@ -96,6 +71,12 @@ export const createThreeScene = (canvas) => {
   CameraControls.install({ THREE: subsetOfTHREE });
   const clock = new Clock();
   const cameraControls = new CameraControls(camera, canvas);
+
+  window.addEventListener("resize", () => {
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+  });
 
   // 7 The Axes & Grid Helpers
   const axes = new AxesHelper();

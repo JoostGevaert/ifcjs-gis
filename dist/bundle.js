@@ -46505,25 +46505,6 @@ let CameraControls$1 = class CameraControls extends EventDispatcher$1 {
     }
 };
 
-const createGeoWithEdges = (geometry, color, x) => {
-  const material = new MeshPhongMaterial({
-    color: color,
-    specular: "white",
-    shininess: 100,
-    flatShading: true,
-    polygonOffset: true,
-    polygonOffsetFactor: 1,
-    polygonOffsetUnits: 1,
-  });
-  const mesh = new Mesh(geometry, material);
-  const edgesGeo = new EdgesGeometry(mesh.geometry);
-  const edgesMaterial = new LineBasicMaterial({ color: "black" });
-  const edges = new LineSegments(edgesGeo, edgesMaterial);
-  mesh.add(edges);
-  mesh.position.x += x;
-  return mesh;
-};
-
 const createThreeScene = (canvas) => {
   //1 The scene
   const scene = new Scene();
@@ -46574,6 +46555,12 @@ const createThreeScene = (canvas) => {
   const clock = new Clock();
   const cameraControls = new CameraControls$1(camera, canvas);
 
+  window.addEventListener("resize", () => {
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+  });
+
   // 7 The Axes & Grid Helpers
   const axes = new AxesHelper();
   axes.material.depthTest = false;
@@ -46586,6 +46573,25 @@ const createThreeScene = (canvas) => {
   scene.add(grid);
 
   return [renderer, scene, clock, cameraControls];
+};
+
+const createGeoWithEdges = (geometry, color, x) => {
+  const material = new MeshPhongMaterial({
+    color: color,
+    specular: "white",
+    shininess: 100,
+    flatShading: true,
+    polygonOffset: true,
+    polygonOffsetFactor: 1,
+    polygonOffsetUnits: 1,
+  });
+  const mesh = new Mesh(geometry, material);
+  const edgesGeo = new EdgesGeometry(mesh.geometry);
+  const edgesMaterial = new LineBasicMaterial({ color: "black" });
+  const edges = new LineSegments(edgesGeo, edgesMaterial);
+  mesh.add(edges);
+  mesh.position.x += x;
+  return mesh;
 };
 
 var NavigationModes;
@@ -124337,7 +124343,7 @@ async function loadIfc(container, ifcModelNumber) {
     viewer.grid.setGrid();
     viewer.axes.setAxes();
 
-    await viewer.IFC.setWasmPath("../");
+    await viewer.IFC.setWasmPath("./");
     const model = await viewer.IFC.loadIfcUrl(url);
     viewer.shadowDropper.renderShadow(model.modelID);
   }
@@ -124376,12 +124382,6 @@ if (threeCanvas) {
   scene.add(blueCube);
   const camera = scene.getObjectByName("camera");
 
-  window.addEventListener("resize", () => {
-    camera.aspect = threeCanvas.clientWidth / threeCanvas.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(threeCanvas.clientWidth, threeCanvas.clientHeight, false);
-  });
-
   function animate() {
     orangeCube.rotation.x += 0.01;
     orangeCube.rotation.z += 0.01;
@@ -124403,7 +124403,7 @@ if (threeCanvas) {
 
 // Visualize several different IFC models read from the repo
 let ifcModelNumber = 0;
-const ifcViewerContainer = document.getElementById("viewer-container");
+const ifcViewerContainer = document.getElementById("ifc-viewer");
 if (ifcViewerContainer) {
   ifcModelNumber = localStorage.getItem("ifc");
   loadIfc(ifcViewerContainer, ifcModelNumber);
@@ -124420,12 +124420,6 @@ if (gltfCanvas) {
   loaderContainer = document.getElementById("loader-container");
   loadGltf(gltfUrl, scene, loaderContainer);
 
-  window.addEventListener("resize", () => {
-    camera.aspect = gltfCanvas.clientWidth / gltfCanvas.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(gltfCanvas.clientWidth, gltfCanvas.clientHeight, false);
-  });
-
   function animate() {
     const delta = clock.getDelta();
     cameraControls.update(delta);
@@ -124437,3 +124431,9 @@ if (gltfCanvas) {
 }
 
 // Upload an IFC file and visualize it with web-ifc-three (WIT)
+const ifcThreeCanvas = document.getElementById("wit");
+if (ifcThreeCanvas) {
+  createThreeScene(ifcThreeCanvas);
+
+  animate();
+}

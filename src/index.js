@@ -1,6 +1,7 @@
 import { BoxGeometry } from "three";
 
-import { createThreeScene, createGeoWithEdges } from "./basic-three";
+import { createThreeScene } from "./basic-three";
+import { createGeoWithEdges } from "./three-cubes";
 import { loadIfc } from "./ifc-viewer";
 import { loadGltf } from "./gltf";
 
@@ -17,12 +18,6 @@ if (threeCanvas) {
   const blueCube = createGeoWithEdges(boxGeometry, "blue", -1);
   scene.add(blueCube);
   const camera = scene.getObjectByName("camera");
-
-  window.addEventListener("resize", () => {
-    camera.aspect = threeCanvas.clientWidth / threeCanvas.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(threeCanvas.clientWidth, threeCanvas.clientHeight, false);
-  });
 
   function animate() {
     orangeCube.rotation.x += 0.01;
@@ -45,7 +40,7 @@ if (threeCanvas) {
 
 // Visualize several different IFC models read from the repo
 let ifcModelNumber = 0;
-const ifcViewerContainer = document.getElementById("viewer-container");
+const ifcViewerContainer = document.getElementById("ifc-viewer");
 if (ifcViewerContainer) {
   ifcModelNumber = localStorage.getItem("ifc");
   loadIfc(ifcViewerContainer, ifcModelNumber);
@@ -62,12 +57,6 @@ if (gltfCanvas) {
   loaderContainer = document.getElementById("loader-container");
   loadGltf(gltfUrl, scene, loaderContainer);
 
-  window.addEventListener("resize", () => {
-    camera.aspect = gltfCanvas.clientWidth / gltfCanvas.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(gltfCanvas.clientWidth, gltfCanvas.clientHeight, false);
-  });
-
   function animate() {
     const delta = clock.getDelta();
     cameraControls.update(delta);
@@ -79,4 +68,9 @@ if (gltfCanvas) {
 }
 
 // Upload an IFC file and visualize it with web-ifc-three (WIT)
+const ifcThreeCanvas = document.getElementById("wit");
+if (ifcThreeCanvas) {
+  const [renderer, scene, clock, cameraControls] = createThreeScene(ifcThreeCanvas);
 
+  animate()
+}
