@@ -3,6 +3,7 @@ import { BoxGeometry } from "three";
 import { createThreeScene, createGeoWithEdges } from "./basic-three";
 import { loadIfc } from "./model-viewer";
 
+// Create a basic Three.js scene with 3 rotating cubes.
 const threeCanvas = document.getElementById("basic-three");
 if (threeCanvas) {
   const [renderer, scene, clock, cameraControls] =
@@ -41,6 +42,7 @@ if (threeCanvas) {
   animate();
 }
 
+// Visualize several different IFC models
 let ifcModelNumber = 0;
 const ifcViewerContainer = document.getElementById("viewer-container");
 if (ifcViewerContainer) {
@@ -48,16 +50,20 @@ if (ifcViewerContainer) {
   loadIfc(ifcViewerContainer, ifcModelNumber);
 }
 
+// Load a glTF in Three.js
 const gltfCanvas = document.getElementById("gltf");
 if (gltfCanvas) {
+  console.log("Hey glTF!");
+  console.log(gltfCanvas);
   const [renderer, scene, clock, cameraControls] =
-    createThreeScene(threeCanvas);
+    createThreeScene(gltfCanvas);
+  const camera = scene.getObjectByName("camera");
   cameraControls.setLookAt(15, 15, 15, 0, 10, 0);
 
   window.addEventListener("resize", () => {
-    camera.aspect = threeCanvas.clientWidth / threeCanvas.clientHeight;
+    camera.aspect = gltfCanvas.clientWidth / gltfCanvas.clientHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(threeCanvas.clientWidth, threeCanvas.clientHeight, false);
+    renderer.setSize(gltfCanvas.clientWidth, gltfCanvas.clientHeight, false);
   });
 
   function animate() {
