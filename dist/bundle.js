@@ -124353,10 +124353,11 @@ const loadGltf = (gltfUrl, scene, loaderContainer) => {
       scene.add(gltf.scene);
     },
     (progress) => {
-      console.log("Loading");
+      const current = Math.floor((progress.loaded / progress.total) * 100);
+      loaderContainer.querySelector("p").textContent = `Loading: ${current}%`;
     },
     (error) => {
-      console.log("Error");
+      console.log(`An error occurred ${error}`);
     }
   );
 };
