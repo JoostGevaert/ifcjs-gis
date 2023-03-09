@@ -124329,7 +124329,7 @@ async function loadIfc(container, ifcModelNumber) {
   if (ifcModelNumber < 1 || ifcModelNumber > 5) {
     return;
   } else {
-    const url = `./static/IFC/0${ifcModelNumber}.ifc`;
+    const url = `../static/IFC/0${ifcModelNumber}.ifc`;
     const viewer = new IfcViewerAPI({
       container,
       backgroundColor: new Color(0xffffff),
@@ -124416,7 +124416,7 @@ if (gltfCanvas) {
   const camera = scene.getObjectByName("camera");
   cameraControls.setLookAt(15, 15, 15, 0, 10, 0);
 
-  gltfUrl = "./static/glTF/police_station.glb";
+  gltfUrl = "../static/glTF/police_station.glb";
   loaderContainer = document.getElementById("loader-container");
   loadGltf(gltfUrl, scene, loaderContainer);
 
