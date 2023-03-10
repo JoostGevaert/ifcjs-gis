@@ -15,8 +15,7 @@
   --orange-500: hwb(27 21% 7%);
 }
 
-html,
-body {
+.overflow-hidden {
   overflow: hidden;
 }
 

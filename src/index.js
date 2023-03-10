@@ -1,6 +1,6 @@
 import { BoxGeometry } from "three";
 
-import { createThreeScene } from "./basic-three";
+import { createThreeScene } from "./three-scene";
 import { createGeoWithEdges } from "./three-cubes";
 import { loadIfc } from "./ifc-viewer";
 import { loadGltf } from "./gltf";
