@@ -124331,23 +124331,51 @@ class IfcViewerAPI {
     }
 }
 
-async function loadIfc(container, ifcModelNumber) {
+const loadIfc = async (container, ifcModelNumber) => {
   if (ifcModelNumber < 1 || ifcModelNumber > 5) {
     return;
   } else {
     const url = `../static/IFC/0${ifcModelNumber}.ifc`;
-    const viewer = new IfcViewerAPI({
+    const ifcViewer = new IfcViewerAPI({
       container,
       backgroundColor: new Color(0xffffff),
     });
-    viewer.grid.setGrid();
-    viewer.axes.setAxes();
+    ifcViewer.grid.setGrid();
+    ifcViewer.axes.setAxes();
 
-    await viewer.IFC.setWasmPath("./");
-    const model = await viewer.IFC.loadIfcUrl(url);
-    viewer.shadowDropper.renderShadow(model.modelID);
+    await ifcViewer.IFC.setWasmPath("./");
+    const model = await ifcViewer.IFC.loadIfcUrl(url);
+    await ifcViewer.shadowDropper.renderShadow(model.modelID);
+
+    return ifcViewer;
   }
-}
+};
+
+const uploadIfcWiv = async (container, inputElement) => {
+  const ifcViewer = new IfcViewerAPI({
+    container,
+    backgroundColor: new Color(0xffffff),
+  });
+  ifcViewer.grid.setGrid();
+  ifcViewer.axes.setAxes();
+
+  inputElement.addEventListener(
+    "change",
+    async (changed) => {
+      const ifcURL = URL.createObjectURL(changed.target.files[0]);
+      await ifcViewer.IFC.setWasmPath("./");
+      const ifcModel = await ifcViewer.IFC.loadIfcUrl(ifcURL);
+      await ifcViewer.shadowDropper.renderShadow(ifcModel.modelID);
+    },
+    false
+  );
+
+  window.ondblclick = async () => await ifcViewer.IFC.selector.pickIfcItem();
+  window.onmousemove = async () =>
+    await ifcViewer.IFC.selector.prePickIfcItem();
+
+  return ifcViewer;
+};
 
 const loadGltf = (gltfUrl, scene, loaderContainer) => {
   const loader = new GLTFLoader();
@@ -124368,7 +124396,7 @@ const loadGltf = (gltfUrl, scene, loaderContainer) => {
   );
 };
 
-const uploadIfc = (inputElement, threeScene) => {
+const uploadIfcWit = (inputElement, threeScene) => {
   const ifcLoader = new IFCLoader();
 
   inputElement.addEventListener(
@@ -124384,7 +124412,7 @@ const uploadIfc = (inputElement, threeScene) => {
 };
 
 // Create a basic Three.js scene with 3 rotating cubes.
-const threeCanvas = document.getElementById("basic-three");
+const threeCanvas = document.getElementById("three-cubes");
 if (threeCanvas) {
   const [renderer, scene, clock, cameraControls] =
     createThreeScene(threeCanvas);
@@ -124424,6 +124452,13 @@ if (ifcViewerContainer) {
   loadIfc(ifcViewerContainer, ifcModelNumber);
 }
 
+// Upload an IFC file and visualize it with web-ifc-viewer (WIV)
+const wivContainer = document.getElementById("wiv");
+if (wivContainer) {
+  const input = document.getElementById("file-input");
+  uploadIfcWiv(wivContainer, input);
+}
+
 // Load a glTF in Three.js
 const gltfCanvas = document.getElementById("gltf");
 if (gltfCanvas) {
@@ -124446,14 +124481,13 @@ if (gltfCanvas) {
 }
 
 // Upload an IFC file and visualize it with web-ifc-three (WIT)
-const ifcThreeCanvas = document.getElementById("wit");
-if (ifcThreeCanvas) {
-  const [renderer, scene, clock, cameraControls] =
-    createThreeScene(ifcThreeCanvas);
+const witCanvas = document.getElementById("wit");
+if (witCanvas) {
+  const [renderer, scene, clock, cameraControls] = createThreeScene(witCanvas);
   const camera = scene.getObjectByName("camera");
 
   const input = document.getElementById("file-input");
-  uploadIfc(input, scene);
+  uploadIfcWit(input, scene);
 
   function animate() {
     const delta = clock.getDelta();

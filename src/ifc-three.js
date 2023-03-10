@@ -1,6 +1,6 @@
 import { IFCLoader } from "web-ifc-three/IFCLoader";
 
-export const uploadIfc = (inputElement, threeScene) => {
+export const uploadIfcWit = (inputElement, threeScene) => {
   const ifcLoader = new IFCLoader();
 
   inputElement.addEventListener(
