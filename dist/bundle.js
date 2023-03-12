@@ -124480,6 +124480,12 @@ if (gltfCanvas) {
   animate();
 }
 
+// Upload a glTF to a Three.js scene
+const gltfUploadCanvas = document.getElementById("upload-gltf");
+if (gltfUploadCanvas) {
+  document.getElementById("loader-container");
+}
+
 // Upload an IFC file and visualize it with web-ifc-three (WIT)
 const witCanvas = document.getElementById("wit");
 if (witCanvas) {
