@@ -1,13 +1,13 @@
 import { BoxGeometry } from "three";
 
-import { createThreeScene } from "./basic-three";
+import { createThreeScene } from "./three-scene";
 import { createGeoWithEdges } from "./three-cubes";
-import { loadIfc } from "./ifc-viewer";
+import { loadIfc, uploadIfcWiv } from "./ifc-viewer";
 import { loadGltf } from "./gltf";
-import { uploadIfc } from "./ifc-three";
+import { uploadIfcWit as uploadIfcWit } from "./ifc-three";
 
 // Create a basic Three.js scene with 3 rotating cubes.
-const threeCanvas = document.getElementById("basic-three");
+const threeCanvas = document.getElementById("three-cubes");
 if (threeCanvas) {
   const [renderer, scene, clock, cameraControls] =
     createThreeScene(threeCanvas);
@@ -44,7 +44,14 @@ let ifcModelNumber = 0;
 const ifcViewerContainer = document.getElementById("ifc-viewer");
 if (ifcViewerContainer) {
   ifcModelNumber = localStorage.getItem("ifc");
-  loadIfc(ifcViewerContainer, ifcModelNumber);
+  const ifcViewer = loadIfc(ifcViewerContainer, ifcModelNumber);
+}
+
+// Upload an IFC file and visualize it with web-ifc-viewer (WIV)
+const wivContainer = document.getElementById("wiv");
+if (wivContainer) {
+  const input = document.getElementById("file-input");
+  const ifcViewer = uploadIfcWiv(wivContainer, input);
 }
 
 // Load a glTF in Three.js
@@ -68,15 +75,23 @@ if (gltfCanvas) {
   animate();
 }
 
+// Upload a glTF to a Three.js scene
+const gltfUploadCanvas = document.getElementById("upload-gltf");
+if (gltfUploadCanvas) {
+  const gltfUrl = "";
+  const loaderContainer = document.getElementById("loader-container");
+  if (!gltfUrl) {
+  }
+}
+
 // Upload an IFC file and visualize it with web-ifc-three (WIT)
-const ifcThreeCanvas = document.getElementById("wit");
-if (ifcThreeCanvas) {
-  const [renderer, scene, clock, cameraControls] =
-    createThreeScene(ifcThreeCanvas);
+const witCanvas = document.getElementById("wit");
+if (witCanvas) {
+  const [renderer, scene, clock, cameraControls] = createThreeScene(witCanvas);
   const camera = scene.getObjectByName("camera");
 
   const input = document.getElementById("file-input");
-  uploadIfc(input, scene);
+  uploadIfcWit(input, scene);
 
   function animate() {
     const delta = clock.getDelta();

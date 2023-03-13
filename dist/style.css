@@ -15,8 +15,7 @@
   --orange-500: hwb(27 21% 7%);
 }
 
-html,
-body {
+.overflow-hidden {
   overflow: hidden;
 }
 
@@ -238,16 +237,11 @@ iframe {
   }
 }
 
-.three-canvas {
+.viewer {
   position: absolute;
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
   outline: none;
-}
-
-.viewer-container {
-  height: 100vh;
-  width: 100vw;
 }
 
 #loader-container {
