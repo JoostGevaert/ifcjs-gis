@@ -1,5 +1,24 @@
 import { Color } from "three";
+import {
+  IFCWALLSTANDARDCASE,
+  IFCSLAB,
+  IFCDOOR,
+  IFCWINDOW,
+  IFCFURNISHINGELEMENT,
+  IFCMEMBER,
+  IFCPLATE,
+} from "web-ifc";
 import { IfcViewerAPI } from "web-ifc-viewer";
+
+const ifcCategories = {
+  IFCWALLSTANDARDCASE,
+  IFCSLAB,
+  IFCDOOR,
+  IFCWINDOW,
+  IFCFURNISHINGELEMENT,
+  IFCMEMBER,
+  IFCPLATE,
+};
 
 export const loadIfc = async (container, ifcModelNumber) => {
   if (ifcModelNumber < 1 || ifcModelNumber > 5) {
@@ -45,4 +64,25 @@ export const uploadIfcWiv = async (container, inputElement) => {
     await ifcViewer.IFC.selector.prePickIfcItem();
 
   return ifcViewer;
+};
+
+const getName = (category) => {
+  const names = Object.keys(ifcCategories);
+  return names.find((name) => categories[name] === category);
+};
+
+const getAll = async (ifcViewer, category) => {
+  return ifcViewer.IFC.loader.ifcManager.getAllItemsOfType(0, category, false);
+};
+
+const newSubsetOfType = async (ifcViewer, category) => {
+  const scene = ifcViewer.context.getScene();
+  const ids = await getAll(ifcViewer, category);
+  return ifcViewer.IFC.loader.ifcManager.createSubset({
+    modelID: 0,
+    scene,
+    ids,
+    removePrevious: true,
+    customID: category.toString(),
+  });
 };
