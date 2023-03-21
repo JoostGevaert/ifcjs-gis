@@ -133,7 +133,7 @@ iframe {
 }
 
 .card:hover {
-  transform: translateY(-1.5rem);
+  transform: translateY(-0.5rem);
   border: var(--light-blue) 0.1em solid;
   border-radius: 2.5rem 0 2.5rem 0;
   cursor: pointer;
@@ -246,7 +246,11 @@ iframe {
 
 .inputs {
   position: absolute;
-  margin: 8px;
+  margin: 0.5rem;
+}
+
+.checkboxes {
+  right: 0.5rem
 }
 
 #loader-container {

@@ -63,15 +63,23 @@ export const uploadIfcWiv = async (container, inputElement) => {
   window.onmousemove = async () =>
     await ifcViewer.IFC.selector.prePickIfcItem();
 
+  // Visibility exercise. It doesn't work, because:
+  // 1. Not everything is in the same file.
+  // 2. There is no IFC model in the viewer when the web page is first rendered.
+  //    How do I make 
+  // await setupAllCategories(ifcViewer);
+
   return ifcViewer;
 };
 
 const getName = (category) => {
   const names = Object.keys(ifcCategories);
-  return names.find((name) => categories[name] === category);
+  return names.find((name) => ifcCategories[name] === category);
 };
 
 const getAll = async (ifcViewer, category) => {
+  console.log(ifcViewer.IFC.loader.ifcManager);
+  console.log(category);
   return ifcViewer.IFC.loader.ifcManager.getAllItemsOfType(0, category, false);
 };
 
@@ -85,4 +93,32 @@ const newSubsetOfType = async (ifcViewer, category) => {
     removePrevious: true,
     customID: category.toString(),
   });
+};
+
+const subsets = {};
+
+const setupCheckbox = async (ifcViewer, category) => {
+  const scene = ifcViewer.context.getScene();
+  const name = getName(category);
+  const checkbox = document.getElementById(name);
+  checkbox.addEventListener("change", (event) => {
+    const checked = event.target.checked;
+    const subset = subsets[category];
+    if (checked) scene.add(subset);
+    else subset.removeFromParent();
+  });
+};
+
+const setupCategory = async (ifcViewer, category) => {
+  subsets[category] = await newSubsetOfType(ifcViewer, category);
+  setupCheckbox(ifcViewer, category);
+};
+
+const setupAllCategories = async (ifcViewer) => {
+  const allCategories = Object.values(ifcCategories);
+  console.log(ifcCategories);
+  for (let i = 0; i < allCategories.length; i++) {
+    const category = allCategories[i];
+    await setupCategory(ifcViewer, category);
+  }
 };
