@@ -1,0 +1,22 @@
+.helloH1 {
+  margin: 1rem 0;
+  color: var(--teal-500)
+}
+
+.helloButton {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--brown-500);
+  color: var(--astro-light-background);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.helloCheckbox {
+  margin: 0.5rem 0
+}
+
+.helloCheckbox input {
+  margin: 0 0.5rem
+}

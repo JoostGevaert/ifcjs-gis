@@ -1,107 +1,70 @@
-:root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-  }
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --astro-light-background: #f1f5f9;
+  --github-dark-background: #0d1016;
+
+  --green-50: #eeffe6;
+  --green-100: #d0e6c7;
+  --green-200: #b3ccaa;
+  --green-300: #97b38f;
+  --green-400: #7c9975;
+  --green-500: #63805e;
+  --green-600: #4b6647;
+  --green-700: #354c33;
+  --green-800: #213320;
+  --green-900: #0f190f;
+
+  --teal-50: #e6ffff;
+  --teal-100: #bae4e6;
+  --teal-200: #93c8cc;
+  --teal-300: #71abb3;
+  --teal-400: #538f99;
+  --teal-500: #3a7380;
+  --teal-600: #255866;
+  --teal-700: #153e4c;
+  --teal-800: #0a2733;
+  --teal-900: #031219;
+
+  --brown-50: #fff2e6;
+  --brown-100: #e6d4c2;
+  --brown-200: #ccb8a1;
+  --brown-300: #b39d83;
+  --brown-400: #998468;
+  --brown-500: #806c4f;
+  --brown-600: #66553a;
+  --brown-700: #4c3f27;
+  --brown-800: #332917;
+  --brown-900: #19140a;
+
+  --gray-50: #e6e6e6;
+  --gray-100: #cfcecd;
+  --gray-200: #b8b8b4;
+  --gray-300: #a0a29c;
+  --gray-400: #868b85;
+  --gray-500: #6e746f;
+  --gray-600: #575e5b;
+  --gray-700: #414647;
+  --gray-800: #2c2e30;
+  --gray-900: #171719;
 }
 
 html,
 body {
+  background-color: var(--astro-light-background);
   max-width: 100vw;
   overflow-x: hidden;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+main {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 80ch;
+  padding: 1rem;
 }
