@@ -1,10 +1,10 @@
 "use client";
 
-import styles from "./styles.module.css"
+import styles from "./components.module.css"
 
 export default function HelloCheckbox() {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    alert(`The value of the checkbox is ${event.target.checked}`);
+    alert(`You changed the value of the checkbox to ${event.target.checked}`);
   };
   return (
     <div className={styles.helloCheckbox}>

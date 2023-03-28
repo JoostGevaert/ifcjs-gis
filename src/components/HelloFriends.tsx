@@ -1,5 +1,3 @@
-import styls from "./styles.module.css";
-
 export default function HelloFriends() {
   const friends = ["Jeroen", "Siegert", "Jos", "Johannes", "Billy"];
   return (
