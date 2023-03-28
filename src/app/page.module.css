@@ -1,3 +1,13 @@
-.helloH1 {
-  color: var(--teal-500)
+.section {
+  margin-bottom: 0.5rem;
+}
+
+.aside {
+  margin: 1rem 8rem 0 0;
+  text-align: center;
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: space-between;
 }
