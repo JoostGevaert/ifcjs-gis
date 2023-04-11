@@ -1,10 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./components.module.css";
 
 export default function HelloCounter() {
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log("Counter updated to " + count);
+  }, [count])
+  
+
   const increaseCount = () => {
     setCount(count + 1);
   };
