@@ -4,6 +4,7 @@ import HelloFriends from "@/components/HelloFriends";
 import HelloButton from "@/components/HelloButton";
 import HelloCheckbox from "@/components/HelloCheckbox";
 import HelloCounter from "@/components/HelloCounter";
+import HelloListAPI from "@/components/HelloListAPI";
 
 export const metadata = {
   title: "IFC.js Frontend BIM App",
@@ -20,8 +21,7 @@ export default function Home() {
             <HelloFriends />
           </section>
           <section className={styles.section}>
-            <h3>Some other section</h3>
-            <p>Some content for the next section</p>
+            <HelloListAPI />
           </section>
         </div>
         <aside className={styles.aside}>
