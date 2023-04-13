@@ -1,9 +1,7 @@
-import React from 'react'
-
-type Props = {}
-
-export default function BuildingViewer({}: Props) {
+export default function BuildingViewer() {
   return (
-    <div>BuildingViewer</div>
-  )
+    <main>
+      <h1>BuildingViewer</h1>
+    </main>
+  );
 }

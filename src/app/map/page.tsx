@@ -1,9 +1,7 @@
-import React from 'react'
-
-type Props = {}
-
-export default function MapViewer({}: Props) {
+export default function MapViewer() {
   return (
-    <div>MapViewer</div>
-  )
+    <main>
+      <h1>MapViewer</h1>
+    </main>
+  );
 }
