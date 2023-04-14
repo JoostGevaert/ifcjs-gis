@@ -1,4 +1,5 @@
 import "./globals.css";
+import DarkMode from "@/components/DarkMode";
 
 export const metadata = {
   title: "IFC.js Frontend BIM App",
@@ -12,7 +13,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="dark:bg-gray-900 dark:text-white">
+        <header>
+          <nav className="m-2">
+            <DarkMode />
+          </nav>
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
