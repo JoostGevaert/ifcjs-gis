@@ -1,6 +1,6 @@
 export default function MapViewer() {
   return (
-    <main>
+    <main className="max-w-prose mx-auto">
       <h1>MapViewer</h1>
     </main>
   );

@@ -1,6 +1,6 @@
 export default function LoginForm() {
   return (
-    <main>
+    <main className="max-w-prose mx-auto">
       <h1>Login</h1>
     </main>
   );

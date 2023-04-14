@@ -1,14 +1,33 @@
 @tailwind base;
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-myteal-500;
+  }
+  h1 {
+    @apply text-2xl;
+    @apply mt-4
+  }
+  h2 {
+    @apply text-xl;
+    @apply mt-3
+  }
+  h3 {
+    @apply text-lg;
+    @apply mt-2
+  }
+  a {
+    @apply underline;
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --astro-light-background: #f1f5f9;
-  --github-dark-background: #0d1016;
-  --teal-500: #3a7380;
-}
-
-html,
+/* html,
 body {
   background-color: var(--astro-light-background);
   max-width: 100vw;
@@ -19,8 +38,4 @@ main {
   margin: 0 auto;
   width: 100%;
   max-width: 80ch;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: var(--teal-500)
-}
+} */

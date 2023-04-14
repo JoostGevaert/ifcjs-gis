@@ -1,4 +1,3 @@
-import styles from "./page.module.css";
 import HelloH1 from "@/app/react/components/HelloH1";
 import HelloFriends from "@/app/react/components/HelloFriends";
 import HelloButton from "@/app/react/components/HelloButton";
@@ -13,19 +12,18 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main>
+    <main className="max-w-prose mx-auto">
       <HelloH1 name="Joost Gevaert" />
-      <div className={styles.flexContainer}>
+      <div className="flex justify-between">
         <div>
-          <section className={styles.section}>
-            <HelloFriends />
+          <section className="">
             <HelloFriends />
           </section>
-          <section className={styles.section}>
+          <section>
             <HelloListAPI />
           </section>
         </div>
-        <aside className={styles.aside}>
+        <aside className="">
           <HelloButton name="Joop Gevaar" />
           <HelloCheckbox />
           <HelloCounter />
