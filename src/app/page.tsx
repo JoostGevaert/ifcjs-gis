@@ -6,7 +6,7 @@ export const metadata = {
 export default function Home() {
   return (
     <main>
-      <h1>BuildingViewer</h1>
+      <h1>Home</h1>
     </main>
   );
 }
