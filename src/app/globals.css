@@ -1,58 +1,11 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --astro-light-background: #f1f5f9;
   --github-dark-background: #0d1016;
-
-  --green-50: #eeffe6;
-  --green-100: #d0e6c7;
-  --green-200: #b3ccaa;
-  --green-300: #97b38f;
-  --green-400: #7c9975;
-  --green-500: #63805e;
-  --green-600: #4b6647;
-  --green-700: #354c33;
-  --green-800: #213320;
-  --green-900: #0f190f;
-
-  --teal-50: #e6ffff;
-  --teal-100: #bae4e6;
-  --teal-200: #93c8cc;
-  --teal-300: #71abb3;
-  --teal-400: #538f99;
   --teal-500: #3a7380;
-  --teal-600: #255866;
-  --teal-700: #153e4c;
-  --teal-800: #0a2733;
-  --teal-900: #031219;
-
-  --brown-50: #fff2e6;
-  --brown-100: #e6d4c2;
-  --brown-200: #ccb8a1;
-  --brown-300: #b39d83;
-  --brown-400: #998468;
-  --brown-500: #806c4f;
-  --brown-600: #66553a;
-  --brown-700: #4c3f27;
-  --brown-800: #332917;
-  --brown-900: #19140a;
-
-  --gray-50: #e6e6e6;
-  --gray-100: #cfcecd;
-  --gray-200: #b8b8b4;
-  --gray-300: #a0a29c;
-  --gray-400: #868b85;
-  --gray-500: #6e746f;
-  --gray-600: #575e5b;
-  --gray-700: #414647;
-  --gray-800: #2c2e30;
-  --gray-900: #171719;
 }
 
 html,
@@ -70,9 +23,4 @@ main {
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--teal-500)
-}
-
-ul,
-ol {
-  margin-left: 1.25rem;
 }
