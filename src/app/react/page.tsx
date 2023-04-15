@@ -12,23 +12,23 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <section className="max-w-prose mx-auto">
+    <div>
       <HelloH1 name="Joost Gevaert" />
       <div className="flex justify-between">
-        <div>
-          <section className="">
+        <div className="max-w-prose mx-auto">
+          <section>
             <HelloFriends />
           </section>
           <section>
             <HelloListAPI />
           </section>
         </div>
-        <aside className="">
+        <aside className="self-center">
           <HelloButton name="Joop Gevaar" />
           <HelloCheckbox />
           <HelloCounter />
         </aside>
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/Button";
 import { useEffect, useState } from "react";
 
 export default function HelloCounter() {
@@ -7,8 +8,7 @@ export default function HelloCounter() {
 
   useEffect(() => {
     console.log("Counter updated to " + count);
-  }, [count])
-  
+  }, [count]);
 
   const increaseCount = () => {
     setCount(count + 1);
@@ -17,16 +17,14 @@ export default function HelloCounter() {
     setCount(count - 1);
   };
   return (
-    <>
-    <span className="">
-      <button className="" onClick={increaseCount}>
-        Increase Count
-      </button>
-      <button className="" onClick={decreaseCount}>
-        Decrease Count
-      </button>
-    </span>
-    <span>Count = {count}</span>
-    </>
+    <div className="mt-4 flex flex-col items-center">
+      <Button onClick={increaseCount}>
+        Count +1
+      </Button>
+      <p className="my-1">Count = {count}</p>
+      <Button onClick={decreaseCount}>
+        Count -1
+      </Button>
+    </div>
   );
 }
