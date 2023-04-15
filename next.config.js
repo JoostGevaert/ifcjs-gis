@@ -15,15 +15,15 @@ if (isGithubActions) {
 }
 
 module.exports = {
+  experimental: {
+    appDir: true,
+  },
   basePath: basePath,
   assetPrefix: assetPrefix,
   // images: {
   //   loader: "imgix",
   //   path: 'the "domain" of your Imigix source',
   // },
-  experimental: {
-    appDir: true,
-  },
 };
 
-export default nextConfig;
+module.exports = nextConfig
