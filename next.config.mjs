@@ -1,13 +1,26 @@
 /**
  * @type {import('next').NextConfig}
  */
-const nextConfig = {
-  images: {
-    loader: "akamai",
-    path: "",
-  },
-  assetPrefix: "/bim-gis",
-  basePath: "/bim-gis",
+const isGithubActions = process.env.GITHUB_ACTIONS || false;
+
+let assetPrefix = "";
+let basePath = "/";
+
+if (isGithubActions) {
+  // trim off `<owner>/`
+  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, "");
+
+  assetPrefix = `/${repo}/`;
+  basePath = `/${repo}`;
+}
+
+module.exports = {
+  basePath: basePath,
+  assetPrefix: assetPrefix,
+  // images: {
+  //   loader: "imgix",
+  //   path: 'the "domain" of your Imigix source',
+  // },
   experimental: {
     appDir: true,
   },
