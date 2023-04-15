@@ -13,11 +13,11 @@ export default function IfcjsLogo({ className }: { className?: string }) {
       <g id="layer1">
         <rect
           fill="#ffcc32"
-          fill-opacity="1"
+          fillOpacity="1"
           stroke="#838b9a"
-          stroke-width="0"
-          stroke-miterlimit="4"
-          stroke-dasharray="none"
+          strokeWidth="0"
+          strokeMiterlimit="4"
+          strokeDasharray="none"
           id="rect911"
           width="65.556702"
           height="58.144085"
@@ -28,11 +28,11 @@ export default function IfcjsLogo({ className }: { className?: string }) {
         />
         <rect
           fill="#ffa50f"
-          fill-opacity="1"
+          fillOpacity="1"
           stroke="#838b9a"
-          stroke-width="0"
-          stroke-miterlimit="4"
-          stroke-dasharray="none"
+          strokeWidth="0"
+          strokeMiterlimit="4"
+          strokeDasharray="none"
           id="rect911-9"
           width="65.556702"
           height="58.144085"
@@ -43,11 +43,11 @@ export default function IfcjsLogo({ className }: { className?: string }) {
         />
         <rect
           fill="#f58410"
-          fill-opacity="1"
+          fillOpacity="1"
           stroke="#838b9a"
-          stroke-width="0"
-          stroke-miterlimit="4"
-          stroke-dasharray="none"
+          strokeWidth="0"
+          strokeMiterlimit="4"
+          strokeDasharray="none"
           id="rect911-4"
           width="65.556702"
           height="58.144085"
@@ -58,11 +58,11 @@ export default function IfcjsLogo({ className }: { className?: string }) {
         />
         <rect
           fill="#ffcc32"
-          fill-opacity="1"
+          fillOpacity="1"
           stroke="#838b9a"
-          stroke-width="0"
-          stroke-miterlimit="4"
-          stroke-dasharray="none"
+          strokeWidth="0"
+          strokeMiterlimit="4"
+          strokeDasharray="none"
           id="rect911-9-0"
           width="65.556702"
           height="58.144085"
