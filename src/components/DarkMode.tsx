@@ -16,16 +16,16 @@ export default function DarkMode() {
   };
 
   return (
-    <Button className="!p-3" onClick={toggleDarkMode}>
+    <button type="button" onClick={toggleDarkMode} className="py-2 pl-3 pr-4 md:p-0 align-middle hover:text-myteal-500 hover:scale-125">
       {isDarkMode ? (
         <svg
           id="sun"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
+          strokeWidth={2}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-4 h-4"
         >
           <path
             strokeLinecap="round"
@@ -37,11 +37,11 @@ export default function DarkMode() {
         <svg
           id="moon"
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+          fill="currentColor"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
+          strokeWidth={2}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-4 h-4"
         >
           <path
             strokeLinecap="round"
@@ -50,6 +50,6 @@ export default function DarkMode() {
           />
         </svg>
       )}
-    </Button>
+    </button>
   );
 }

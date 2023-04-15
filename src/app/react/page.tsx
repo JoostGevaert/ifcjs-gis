@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className="max-w-prose mx-auto">
+    <section className="max-w-prose mx-auto">
       <HelloH1 name="Joost Gevaert" />
       <div className="flex justify-between">
         <div>
@@ -29,6 +29,6 @@ export default function Home() {
           <HelloCounter />
         </aside>
       </div>
-    </main>
+    </section>
   );
 }

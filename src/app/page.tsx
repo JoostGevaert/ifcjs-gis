@@ -5,7 +5,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className="max-w-prose mx-auto">
+    <section className="max-w-prose mx-auto">
       <h1>Home</h1>
       <p className="text-justify">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis
@@ -31,6 +31,6 @@ export default function Home() {
         corrupti perspiciatis debitis omnis, quam modi nesciunt nemo nihil ipsam
         nobis ducimus aut doloribus aperiam accusantium dolore non maxime quos?
       </p>
-    </main>
+    </section>
   );
 }
