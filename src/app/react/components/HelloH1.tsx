@@ -1,3 +1,3 @@
 export default function HelloWorld({ name }: { name: string }) {
-  return <h1 className="">Hello {name}!</h1>;
+  return <h1 className="text-center">Hello {name}!</h1>;
 }
