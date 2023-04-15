@@ -101,7 +101,7 @@ export default function HelloListAPI({userCount}: {userCount: number}) {
       }
     };
     fetchNames();
-  }, []);
+  }, [userCount]);
 
   const joopGevaar = useAppContext()?.name;
 
