@@ -8,7 +8,8 @@ import DarkMode from "./DarkMode";
 import IfcjsLogo from "./IfcjsLogo";
 
 export default function Navbar() {
-  const pathname = usePathname().replace(/^\/home/, "");
+  // const pathname = usePathname();
+  const pathname = usePathname().replace(/^\/bim-gis/, "");
 
   const routes = [
     { name: "Home", url: "/" },
