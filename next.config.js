@@ -2,9 +2,10 @@
  * @type {import('next').NextConfig}
  */
 const isGithubActions = process.env.GITHUB_ACTIONS || false;
+console.log("isGithubActions", isGithubActions);
 
 let assetPrefix = "";
-let basePath = "/";
+let basePath = "";
 
 if (isGithubActions) {
   // trim off `<owner>/`
@@ -25,5 +26,3 @@ module.exports = {
   //   path: 'the "domain" of your Imigix source',
   // },
 };
-
-module.exports = nextConfig
