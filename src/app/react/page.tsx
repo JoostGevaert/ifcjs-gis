@@ -12,7 +12,7 @@ export const metadata = {
   description: "First steps towards a frontend BIM app with IFC.js",
 };
 
-export default function Home() {
+export default function React() {
   return (
     <ContextWrapper>
       <HelloH1 name="Joost Gevaert" />
