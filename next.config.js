@@ -19,6 +19,7 @@ module.exports = {
   experimental: {
     appDir: true,
   },
+  output: 'export',
   basePath: basePath,
   assetPrefix: assetPrefix,
   // images: {
