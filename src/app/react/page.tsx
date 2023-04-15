@@ -4,6 +4,7 @@ import HelloButton from "@/app/react/components/HelloButton";
 import HelloCheckbox from "@/app/react/components/HelloCheckbox";
 import HelloCounter from "@/app/react/components/HelloCounter";
 import HelloListAPI from "@/app/react/components/HelloListAPI";
+import { ContextWrapper } from "./context/state";
 
 export const metadata = {
   title: "IFC.js Frontend BIM App",
@@ -12,7 +13,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <div>
+    <ContextWrapper>
       <HelloH1 name="Joost Gevaert" />
       <div className="flex justify-between">
         <div className="max-w-prose mx-auto">
@@ -20,7 +21,7 @@ export default function Home() {
             <HelloFriends />
           </section>
           <section>
-            <HelloListAPI />
+            <HelloListAPI userCount={7} />
           </section>
         </div>
         <aside className="self-center">
@@ -29,6 +30,6 @@ export default function Home() {
           <HelloCounter />
         </aside>
       </div>
-    </div>
+    </ContextWrapper>
   );
 }

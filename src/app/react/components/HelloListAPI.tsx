@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppContext } from "../context/state";
 
 interface Person {
   gender: string;
@@ -69,7 +70,7 @@ interface RandomUserAPIResponse {
   };
 }
 
-export default function HelloListAPI() {
+export default function HelloListAPI({userCount}: {userCount: number}) {
   const [names, setNames] = useState<string[]>([]);
 
   useEffect(() => {
@@ -89,7 +90,7 @@ export default function HelloListAPI() {
     // )
 
     const fetchNames = async () => {
-      const response = await fetch("https://randomuser.me/api?results=5");
+      const response = await fetch(`https://randomuser.me/api?results=${userCount}`);
       if (response) {
         const data: RandomUserAPIResponse = await response.json();
         const newNames: string[] = [];
@@ -100,8 +101,9 @@ export default function HelloListAPI() {
       }
     };
     fetchNames();
-
   }, []);
+
+  const joopGevaar = useAppContext()?.name;
 
   return (
     <>
@@ -109,6 +111,7 @@ export default function HelloListAPI() {
       <ul className="space-y-0.5 list-disc list-inside">
         {Boolean(names.length) &&
           names.map((name, i) => <li key={`${i}:${name}`}>{name}</li>)}
+          <li>{joopGevaar}</li>
       </ul>
     </>
   );
