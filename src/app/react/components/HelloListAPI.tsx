@@ -105,8 +105,8 @@ export default function HelloListAPI() {
 
   return (
     <>
-      <h3>Some random users</h3>
-      <ul>
+      <h3 className="mt-2">Some random users</h3>
+      <ul className="space-y-0.5 list-disc list-inside">
         {Boolean(names.length) &&
           names.map((name, i) => <li key={`${i}:${name}`}>{name}</li>)}
       </ul>
