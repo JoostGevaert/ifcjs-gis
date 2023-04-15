@@ -14,7 +14,7 @@ export default function Navbar() {
     { name: "Map", url: "/map" },
     { name: "Building", url: "/building" },
     { name: "About", url: "/about" },
-    { name: "Login", url: "/login" },
+    { name: "React", url: "/react" },
   ];
 
   const [isCollapsed, setIsCollapsed] = useState(true);
