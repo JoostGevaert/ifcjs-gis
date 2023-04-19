@@ -17,6 +17,7 @@ export default function Navbar() {
     { name: "Building", url: "/building" },
     { name: "About", url: "/about" },
     { name: "React", url: "/react" },
+    { name: "Firebase", url: "/firebase" },
   ];
 
   const [isCollapsed, setIsCollapsed] = useState(true);
