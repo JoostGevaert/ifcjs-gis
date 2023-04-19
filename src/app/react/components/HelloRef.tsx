@@ -15,7 +15,7 @@ export default function HelloRef() {
     <div className="mt-4">
       <Button onClick={clickHandler}>Focus the field</Button>
       <br />
-      <input ref={inputRef} type="text" className="w-32 dark:bg-gray-900"/>
+      <input ref={inputRef} type="text" className="w-32 dark:bg-gray-900" />
     </div>
   );
 }

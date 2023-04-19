@@ -18,13 +18,9 @@ export default function HelloCounter() {
   };
   return (
     <div className="flex flex-col items-center">
-      <Button onClick={increaseCount}>
-        Count +1
-      </Button>
+      <Button onClick={increaseCount}>Count +1</Button>
       <p className="my-1">Count = {count}</p>
-      <Button onClick={decreaseCount}>
-        Count -1
-      </Button>
+      <Button onClick={decreaseCount}>Count -1</Button>
     </div>
   );
 }

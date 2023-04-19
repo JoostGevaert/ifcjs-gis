@@ -11,7 +11,7 @@ export default function Button({
     <button
       type="button"
       onClick={onClick}
-      className={`text-white bg-myteal-500 hover:bg-myteal-600 active:ring-2 active:ring-myteal-400 font-medium text-sm rounded-lg px-5 py-2.5 ${className}`}
+      className={`rounded-lg bg-myteal-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-myteal-600 active:ring-2 active:ring-myteal-400 ${className}`}
     >
       {children}
     </button>

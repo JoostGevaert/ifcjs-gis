@@ -2,8 +2,8 @@ export default function IfcjsLogo({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="512"
-      height="512"
+      width="24"
+      height="24"
       viewBox="0 0 135.46666 135.46667"
       className={className}
       version="1.1"

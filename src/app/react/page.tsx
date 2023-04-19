@@ -44,7 +44,7 @@ export default function React() {
               <HelloFriends />
             </section>
           </div>
-          <aside className="self-center flex flex-col space-y-3 items-center">
+          <aside className="flex flex-col items-center space-y-3 self-center">
             <HelloButton name="Joop Gevaar" />
             <HelloCheckbox />
             <HelloCounter />
