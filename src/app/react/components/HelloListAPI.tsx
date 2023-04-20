@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAppContext } from "../context/state";
+import { useAppContext } from "@/lib/context";
 
 interface Person {
   gender: string;

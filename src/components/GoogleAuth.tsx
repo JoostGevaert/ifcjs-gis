@@ -1,13 +1,14 @@
 "use client";
 
-import Button from "@/components/Button";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "./firebaseClient";
+import { firebaseApp } from "@/lib/firebaseClient";
+import Button from "@/components/Button";
 
 export default function GoogleAuth() {
   const provider = new GoogleAuthProvider();
 
   const signInWithGoogle = () => {
+    const auth = getAuth(firebaseApp);
     signInWithPopup(auth, provider);
     // .then((result) => {
     // const credential = GoogleAuthProvider.credentialFromResult(result);
