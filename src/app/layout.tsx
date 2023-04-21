@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Providers from "./providers";
+import UseClientProviders from "./UseClientProviders";
+import { ContextProvider } from "@/lib/context";
 
 export const metadata = {
   title: "IFC.js Frontend BIM App",
@@ -15,12 +16,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="mx-auto max-w-screen-xl dark:bg-gray-900 dark:text-white">
-        <Providers>
-          <header>
-            <Navbar />
-          </header>
-          <main className="mx-4">{children}</main>
-        </Providers>
+        <UseClientProviders>
+          <ContextProvider>
+            <header>
+              <Navbar />
+            </header>
+            <main className="mx-4">{children}</main>
+          </ContextProvider>
+        </UseClientProviders>
       </body>
     </html>
   );

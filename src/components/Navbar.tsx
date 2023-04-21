@@ -80,6 +80,15 @@ export default function Navbar() {
             <li key="DarkMode">
               <DarkMode />
             </li>
+            <li key="Login" className="my-2 md:my-0">
+              <Link
+                href="/login"
+                onClick={() => setIsCollapsed(true)}
+                className="my-10 rounded-lg bg-myteal-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-myteal-600 active:ring-2 active:ring-myteal-400"
+              >
+                Login
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
