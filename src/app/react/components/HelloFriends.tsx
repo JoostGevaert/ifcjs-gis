@@ -3,7 +3,7 @@ export default function HelloFriends() {
   return (
     <>
       <h3 className="mt-2">Some of Joost&apos;s friends</h3>
-      <ul className="space-y-0.5 list-disc list-inside">
+      <ul className="list-inside list-disc space-y-0.5">
         {friends.map((name, i) => (
           <li key={`${name}${i}`}>{name}</li>
         ))}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAppContext } from "../context/state";
+import { useAppContext } from "@/lib/context";
 
 interface Person {
   gender: string;
@@ -70,7 +70,7 @@ interface RandomUserAPIResponse {
   };
 }
 
-export default function HelloListAPI({userCount}: {userCount: number}) {
+export default function HelloListAPI({ userCount }: { userCount: number }) {
   const [names, setNames] = useState<string[]>([]);
 
   useEffect(() => {
@@ -90,7 +90,9 @@ export default function HelloListAPI({userCount}: {userCount: number}) {
     // )
 
     const fetchNames = async () => {
-      const response = await fetch(`https://randomuser.me/api?results=${userCount}`);
+      const response = await fetch(
+        `https://randomuser.me/api?results=${userCount}`
+      );
       if (response) {
         const data: RandomUserAPIResponse = await response.json();
         const newNames: string[] = [];
@@ -101,17 +103,17 @@ export default function HelloListAPI({userCount}: {userCount: number}) {
       }
     };
     fetchNames();
-  }, []);
+  }, [userCount]);
 
   const joopGevaar = useAppContext()?.name;
 
   return (
     <>
       <h3 className="mt-2">Some random users</h3>
-      <ul className="space-y-0.5 list-disc list-inside">
+      <ul className="list-inside list-disc space-y-0.5">
         {Boolean(names.length) &&
           names.map((name, i) => <li key={`${i}:${name}`}>{name}</li>)}
-          <li>{joopGevaar}</li>
+        <li>{joopGevaar}</li>
       </ul>
     </>
   );

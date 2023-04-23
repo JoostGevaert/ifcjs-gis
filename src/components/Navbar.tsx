@@ -17,20 +17,21 @@ export default function Navbar() {
     { name: "Building", url: "/building" },
     { name: "About", url: "/about" },
     { name: "React", url: "/react" },
+    { name: "Firebase", url: "/firebase" },
   ];
 
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <nav className="border-gray-200 bg-white dark:bg-gray-900">
+      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         <Link href="/" className="flex items-center">
           <IfcjsLogo className="h-6 w-6 hover:scale-125" />
         </Link>
         <button
           type="button"
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="inline-flex items-center p-1 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          className="ml-3 inline-flex items-center rounded-lg p-1 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
           aria-controls="navbar-default"
           aria-expanded={isCollapsed}
         >
@@ -39,7 +40,7 @@ export default function Navbar() {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="w-5 h-5"
+            className="h-5 w-5"
           >
             <path
               fillRule="evenodd"
@@ -52,13 +53,13 @@ export default function Navbar() {
           className={`${isCollapsed ? "hidden" : "w-full"} md:block md:w-auto`}
           id="navbar-default"
         >
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
             {routes.map((route, i) =>
               route.url === pathname ? (
                 <li key={`${i}: ${route.name}`}>
                   <Link
                     href={route.url}
-                    className="block py-2 pl-3 pr-4 text-white bg-myteal-500 rounded md:bg-transparent md:text-myteal-500 md:p-0"
+                    className="block rounded bg-myteal-500 py-2 pl-3 pr-4 text-white md:bg-transparent md:p-0 md:text-myteal-500"
                     aria-current="page"
                   >
                     {route.name}
@@ -69,7 +70,7 @@ export default function Navbar() {
                   <Link
                     href={route.url}
                     onClick={() => setIsCollapsed(true)}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 md:hover:underline md:hover:text-myteal-500 md:dark:hover:text-myteal-500 md:dark:hover:bg-transparent dark:text-white dark:hover:bg-gray-700"
+                    className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-myteal-500 md:hover:underline md:dark:hover:bg-transparent md:dark:hover:text-myteal-500"
                   >
                     {route.name}
                   </Link>
@@ -78,6 +79,15 @@ export default function Navbar() {
             )}
             <li key="DarkMode">
               <DarkMode />
+            </li>
+            <li key="Login" className="my-2 md:my-0">
+              <Link
+                href="/login"
+                onClick={() => setIsCollapsed(true)}
+                className="my-10 rounded-lg bg-myteal-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-myteal-600 active:ring-2 active:ring-myteal-400"
+              >
+                Login
+              </Link>
             </li>
           </ul>
         </div>

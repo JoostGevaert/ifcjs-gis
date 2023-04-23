@@ -17,14 +17,10 @@ export default function HelloCounter() {
     setCount(count - 1);
   };
   return (
-    <div className="mt-4 flex flex-col items-center">
-      <Button onClick={increaseCount}>
-        Count +1
-      </Button>
+    <div className="flex flex-col items-center">
+      <Button onClick={increaseCount}>Count +1</Button>
       <p className="my-1">Count = {count}</p>
-      <Button onClick={decreaseCount}>
-        Count -1
-      </Button>
+      <Button onClick={decreaseCount}>Count -1</Button>
     </div>
   );
 }
